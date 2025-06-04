@@ -1,0 +1,18 @@
+name: flask-docker-demo
+region: nyc
+services:
+- build_command: pip install -r requirements.txt
+  environment_slug: python
+  envs:
+  - key: ENVIRONMENT
+    value: production
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: YOUR_GITHUB_REPO
+  http_port: 5000
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: web
+  run_command: gunicorn --bind :5000 app:app
+  source_dir: /
